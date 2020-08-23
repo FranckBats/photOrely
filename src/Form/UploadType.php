@@ -7,16 +7,15 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PictureType extends AbstractType
+class UploadType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name')
             ->add('description')
-            ->add('file', FileType::class, array('data_class' => null))
-            ->add('createdAt')
-            ->add('updatedAt')
+            ->add('file')
+            ->add('tag')
         ;
     }
 

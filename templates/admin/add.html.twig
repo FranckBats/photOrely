@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+<div class="page-wrap">
+
+    <!-- Nav -->
+    <nav id="nav">
+        <ul>
+            <li><a href="{{ path('home') }}"><span class="icon fa-home"></span></a></li>
+            <li><a href="{{ path('gallery') }}"><span class="icon fa-camera-retro"></span></a></li>
+            <li><a href="{{ path('admin') }}" class="active"><span class="icon fa-file-text-o"></span></a></li>
+        </ul>
+    </nav>
+
+    <!-- Main -->
+    <section id="main">
+        {{form(form)}}
+    
+    <!-- Footer -->
+        <footer id="footer">
+            <div class="copyright">
+            &copy; Untitled Design: <a href="https://templated.co/">TEMPLATED</a>. Images: <a href="https://unsplash.com/">Unsplash</a>.
+            </div>
+        </footer>
+    </section>
+</div>
+{% endblock %}

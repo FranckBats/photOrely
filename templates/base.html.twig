@@ -5,19 +5,19 @@
         <title>{% block title %}photOrely{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {% block stylesheets %}
-        <link rel="stylesheet" href="assets/css/main.css" />
+        <link rel="stylesheet" href="{{asset('assets/css/main.css')}}" />
         {% endblock %}
     </head>
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}
         		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.poptrox.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src="{{asset('assets/js/jquery.min.js')}}"></script>
+			<script src="{{asset('assets/js/jquery.poptrox.min.js')}}"></script>
+			<script src="{{asset('assets/js/jquery.scrolly.min.js')}}"></script>
+			<script src="{{asset('assets/js/skel.min.js')}}"></script>
+			<script src="{{asset('assets/js/util.js')}}"></script>
+			<script src="{{asset('assets/js/main.js')}}"></script>
         {% endblock %}
     </body>
 </html>
