@@ -42,6 +42,11 @@ class Picture
      */
     private $updatedAt;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -100,7 +105,7 @@ class Picture
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
