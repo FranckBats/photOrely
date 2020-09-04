@@ -19,7 +19,7 @@
         <a href="{{ path('admin_add') }}"><button>Ajouter une photo</button></a>
 
         <h1>Liste des photos</h1>
-        
+
         <table class="table">
             <thead>
                 <tr>
@@ -34,7 +34,7 @@
                 <tr>
                 <th scope="row">{{ picture.name }}</th>
                 <td>{{ picture.description }}</td>
-                <td>{{ picture.file }}</td>
+                <td><img src="{{ picture.file }}" alt="" width="200" height="100"></td>
                 <td>{{ picture.tag }}</td>
                 </tr>
             {% endfor %}

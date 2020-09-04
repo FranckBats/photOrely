@@ -86,7 +86,7 @@ class AdminController extends AbstractController
             $filename = generateRandomString();
 
             // Inscription de l'emplacement où doit être stocker le fichier image dans une variable
-            $directory = 'assets/files/pictures/';
+            $directory = 'assets/pictures/';
 
             // L'objet Picture reçoit dans sa propriété file l'emplacement final du fichier image pour ensuite pouvoir l'utiliser par le FRONT
             $finalDirectory = $directory.$filename.'.jpg';
