@@ -2,7 +2,9 @@
 
 {% block title %}Ajout photo - photOrely{% endblock %}
 
+
 {% block body %}
+
 <div class="page-wrap">
 
     <!-- Nav -->
@@ -16,7 +18,14 @@
 
     <!-- Main -->
     <section id="main">
-        {{form(form)}}
+        {{form_start(form)}}
+        {{form_row(form.name)}}
+        {{form_row(form.description)}}
+        {{form_row(form.file)}}
+        <div><label for="upload"><span id="preview"></span></label></div>
+        {{form_row(form.tag)}}
+        {{form_row(form.submit)}}
+        {{form_end(form)}}
     <!-- Footer -->
         <footer id="footer">
             <div class="copyright">
@@ -25,4 +34,34 @@
         </footer>
     </section>
 </div>
+
+ <script type="text/javascript">
+
+//  Fonction pour afficher une prévisualisation de l'image uploader
+    function handleFiles(files) {
+        var imageType = /^image\//;
+        for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        if (!imageType.test(file.type)) {
+            alert("veuillez sélectionner une image");
+        }else{
+            if(i == 0){
+            preview.innerHTML = '';
+            }
+            var img = document.createElement("img");
+            img.classList.add("obj");
+            img.file = file;
+            preview.appendChild(img); 
+            var reader = new FileReader();
+            reader.onload = ( function(aImg) { 
+            return function(e) { 
+            aImg.src = e.target.result; 
+        }; 
+        })(img);
+        reader.readAsDataURL(file);
+        }
+        
+        }
+    }
+ </script>
 {% endblock %}

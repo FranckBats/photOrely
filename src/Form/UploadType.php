@@ -20,6 +20,7 @@ class UploadType extends AbstractType
             ->add('file', FileType::class, [
                 'data_class' => null,
                 'mapped' => false,
+                'attr' => ['onchange' => 'handleFiles(files)']
             ])
             ->add('tag', ChoiceType::class, [
                 'choices' => [
