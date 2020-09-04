@@ -17,7 +17,10 @@ class UploadType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('file', FileType::class)
+            ->add('file', FileType::class, [
+                'data_class' => null,
+                'mapped' => false,
+            ])
             ->add('tag', ChoiceType::class, [
                 'choices' => [
                     'Personnes' => 'people',

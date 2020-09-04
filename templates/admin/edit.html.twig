@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout photo - photOrely{% endblock %}
+{% block title %}Edition d'une photo - photOrely{% endblock %}
 
 {% block body %}
 <div class="page-wrap">
@@ -16,7 +16,13 @@
 
     <!-- Main -->
     <section id="main">
-        {{form(form)}}
+        {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.tag) }}
+        {{ form_row(form.submit) }}
+        {{ form_widget(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
     <!-- Footer -->
         <footer id="footer">
             <div class="copyright">

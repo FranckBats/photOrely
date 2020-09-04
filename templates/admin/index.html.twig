@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Administration - photOrely{% endblock %}
 
 {% block body %}
 <div class="page-wrap">
@@ -17,7 +17,29 @@
     <!-- Main -->
     <section id="main">
         <a href="{{ path('admin_add') }}"><button>Ajouter une photo</button></a>
-    
+
+        <h1>Liste des photos</h1>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Description</th>
+                <th scope="col">Fichier</th>
+                <th scope="col">Tag</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for picture in pictures %}
+                <tr>
+                <th scope="row">{{ picture.name }}</th>
+                <td>{{ picture.description }}</td>
+                <td>{{ picture.file }}</td>
+                <td>{{ picture.tag }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
     <!-- Footer -->
         <footer id="footer">

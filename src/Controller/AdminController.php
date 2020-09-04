@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Picture;
+use App\Repository\PictureRepository;
 use App\Form\UploadType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,10 +15,37 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin", name="admin")
      */
-    public function index()
+    public function browse(PictureRepository $pictureRepository)
     {
+        $pictures = $pictureRepository->findAll();
+
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
+            'pictures' => $pictures,
+            ]);
+        }
+
+    /**
+     * @Route("/admin/edit/{id}", name="admin_edit", requirements={"id": "\d+"}, methods={"GET", "POST"})
+     */
+    public function edit(Picture $picture, Request $request, EntityManagerInterface $em)
+    {
+        $form = $this->createForm(UploadType::class, $picture);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            dump($picture);
+            $em->persist($picture);
+            $em->flush();
+
+            return $this->redirectToRoute('admin');
+        }
+
+        return $this->render('admin/edit.html.twig', [
+            'controller_name' => 'AdminController',
+            'form' => $form->createView(),
         ]);
     }
 
@@ -71,6 +99,7 @@ class AdminController extends AbstractController
             // Inscription dans le services.yaml de l'emplacement de destination des fichiers images
             $file->move($this->getParameter('pictures_directory'), $filename.'.jpg');
 
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('admin/add.html.twig', [
@@ -78,5 +107,6 @@ class AdminController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
 
 }
