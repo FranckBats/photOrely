@@ -6,6 +6,7 @@ use App\Entity\Picture;
 use App\Repository\PictureRepository;
 use App\Form\UploadType;
 use Doctrine\ORM\EntityManagerInterface;
+use Intervention\Image\ImageManagerStatic as Image;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -89,16 +90,24 @@ class AdminController extends AbstractController
             $directory = 'assets/pictures/';
 
             // L'objet Picture reçoit dans sa propriété file l'emplacement final du fichier image pour ensuite pouvoir l'utiliser par le FRONT
-            $finalDirectory = $directory.$filename.'.jpg';
+            $finalDirectory = $directory.$filename;
             $picture->setFile($finalDirectory);
 
             $em->persist($picture);
             $em->flush();
-
+            
+            
             // Maintenant il faut uploader et bouger le fichier image sur le projet/serveur
             // Inscription dans le services.yaml de l'emplacement de destination des fichiers images
             $file->move($this->getParameter('pictures_directory'), $filename.'.jpg');
 
+            // Création de la miniature pour la page d'accueil avec la librairie PHP Intervention Image
+            Image::configure(array('driver' => 'gd'));
+
+            $preview = Image::make('assets/pictures/'.$filename.'.jpg');
+            $preview->resize(450, 450);
+            $preview->save('assets/pictures/'.$filename.'-preview.jpg');
+            
             return $this->redirectToRoute('admin');
         }
 
